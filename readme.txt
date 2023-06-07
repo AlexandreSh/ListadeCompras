@@ -5,27 +5,37 @@ Alexandre Y. F. Shimizu
 Fernanda Barrigosse
 Larissa R. Lopes
 
-Visão Geral:
 
-Será um aplicativo que gerencia listas de compras. 1 usuário pode ter 0 ou n listas. As listas terão os itens de compra e dados resumidos dos itens, (inicialmente apenas nome e preço).
+Visão Geral:
+  O aplicativo de lista de compras permite que os usuários criem e gerenciem suas listas de compras. Cada usuário pode ter várias listas, contendo itens de compra e informações resumidas, como nome e preço.
 
 Papéis:
 
-Usuários administradores poderão cadastrar novos itens que poderão ser adicionados as listas, inicialmente usuários não-administradores não terão acesso ao sistema de cadastro para novos itens.
+  Usuário padrão: Pode criar e gerenciar suas próprias listas de compras, adicionar e remover itens das listas.
 
-Requisitos funcionais:
+  Administrador: Além das funcionalidades de um usuário padrão, pode cadastrar novos itens que estarão disponíveis para adicionar às listas.
+  Requisitos Funcionais:
 
-Usuários cadastrados poderão adicionar ou remover itens da lista, um usuário poderá compartilhar a lista que será acessível inclusive para usuários não cadastrados, mas apenas no modo leitura. 
-As listas conterão os itens, o número de cada item, valor o total de cada item e o valor total da lista.
-Apenas usuários cadastrados terão acesso ao sistema de criação de novas listas, e apenas administradores poderrão cadastrar novos itens.
-Os usuários devem poder se cadastrar no aplicativo fornecendo informações básicas, como nome, e-mail e senha.
-O aplicativo deve validar as informações do usuário e garantir que não haja duplicação de contas.
-Os usuários devem poder fazer login no aplicativo usando suas credenciais registradas.
-O usuário deve ter a opção de adicionar itens à lista no momento da criação ou posteriormente.
-Os usuários devem poder editar o nome de uma lista existente.
-Os usuários devem poder adicionar, remover ou atualizar itens em uma lista existente.
-Para cada item, o usuário deve poder especificar o nome e o preço.
-Os usuários devem poder excluir uma lista de compras existente.
-O aplicativo deve solicitar confirmação antes de excluir permanentemente uma lista.
-Os usuários devem poder visualizar todas as suas listas de compras existentes.
-Os usuários devem poder visualizar os detalhes de uma lista específica, incluindo o nome da lista e todos os itens da lista com seus nomes e preços.
+Registro e Autenticação:
+  Os usuários devem se registrar no aplicativo fornecendo um nome de usuário e uma senha.
+  Após o registro, os usuários devem poder fazer login no aplicativo usando suas credenciais.
+  
+Criação e Gerenciamento de Listas:
+  Usuários cadastrados podem criar várias listas de compras.
+  Cada lista deve ter um nome único fornecido pelo usuário.
+  Os usuários podem adicionar, remover e atualizar itens em suas listas.
+  Cada item deve ter um nome e um preço.
+  Os usuários podem visualizar o valor total de cada item e o valor total da lista.
+
+Cadastro de Novos Itens (para administradores):
+  Os administradores têm acesso a um sistema de cadastro para novos itens de compra.
+  Eles podem adicionar novos itens ao sistema, fornecendo um nome e um preço para cada item.
+  Os itens cadastrados pelos administradores estarão disponíveis para todos os usuários ao adicionar itens às suas listas.
+  
+Segurança e Privacidade:
+  As senhas dos usuários devem ser armazenadas de forma segura, usando técnicas adequadas de hash e salting.
+  A comunicação entre o aplicativo e o servidor deve ser feita por meio de uma conexão segura, usando criptografia SSL/TLS.
+  
+Interface de Usuário:
+  O aplicativo deve ter uma interface amigável e intuitiva para facilitar a criação e gerenciamento de listas de compras.
+  As ações, como adicionar/remover itens, compartilhar listas e atualizar informações, devem ser realizadas de maneira clara e fácil de entender.
