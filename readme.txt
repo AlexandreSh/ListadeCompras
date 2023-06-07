@@ -2,16 +2,16 @@ Especificações:
 
 Alunos:
 Alexandre Y. F. Shimizu
-Camila V. C. Costa
+Fernanda Barrigosse
 Larissa R. Lopes
 
 Visão Geral:
 
-Será um aplicativo que gerencia listas de compras. Pode ser 1 usuário por lista ou n:1 usuários:lista. As listas terão itens de compra e dados resumidos dos itens, (inicialmente apenas nome e preço).
+Será um aplicativo que gerencia listas de compras. 1 usuário pode ter 0 ou n listas. As listas terão os itens de compra e dados resumidos dos itens, (inicialmente apenas nome e preço).
 
 Papéis:
 
-Usuários administradores poderão cadastrar novos itens que poderão ser adicionados a listas, inicialmente usuários não-administradores não terão acesso ao sistema de cadastro para novos itens.
+Usuários administradores poderão cadastrar novos itens que poderão ser adicionados as listas, inicialmente usuários não-administradores não terão acesso ao sistema de cadastro para novos itens.
 
 Requisitos funcionais:
 
