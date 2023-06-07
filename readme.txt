@@ -34,7 +34,6 @@ Cadastro de Novos Itens (para administradores):
   
 Segurança e Privacidade:
   As senhas dos usuários devem ser armazenadas de forma segura, usando técnicas adequadas de hash e salting.
-  A comunicação entre o aplicativo e o servidor deve ser feita por meio de uma conexão segura, usando criptografia SSL/TLS.
   
 Interface de Usuário:
   O aplicativo deve ter uma interface amigável e intuitiva para facilitar a criação e gerenciamento de listas de compras.
