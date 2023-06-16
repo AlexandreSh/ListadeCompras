@@ -9,10 +9,12 @@ import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private boolean showLogin = true;
+    private boolean showLogin = false;
 
     private TextView titleTextView;
     private TextView toggleFormTextView;
+
+    private  TextView toggleFormTextView2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,8 +23,9 @@ public class LoginActivity extends AppCompatActivity {
 
         titleTextView = findViewById(R.id.title_textview);
         toggleFormTextView = findViewById(R.id.toggle_form_textview);
+        toggleFormTextView2 = findViewById(R.id.toggle_form_textview2);
 
-        toggleFormTextView.setOnClickListener(new View.OnClickListener() {
+        toggleFormTextView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 toggleForm();
@@ -42,13 +45,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private void toggleForm() {
         showLogin = !showLogin;
-
         if (showLogin) {
             titleTextView.setText("Login");
-            toggleFormTextView.setText("Não tem uma conta? Cadastre-se");
+            toggleFormTextView.setText("Não tem uma conta?");
+            toggleFormTextView2.setText("Cadastre-se");
         } else {
             titleTextView.setText("Cadastrar Novo Usuário");
-            toggleFormTextView.setText("Já tem uma conta? Fazer login");
+            toggleFormTextView.setText("Já tem uma conta?");
+            toggleFormTextView2.setText("Fazer Login");
         }
     }
 

@@ -19,37 +19,61 @@
         android:id="@+id/title_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:text="Login"
+        android:textColor="@color/greenText"
         android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp" />
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/username_edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:hint="Nome de usuário"
+        android:textColorHint="@color/greenText"
         android:inputType="text" />
 
     <EditText
         android:id="@+id/password_edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:hint="Senha"
+        android:textColorHint="@color/greenText"
         android:inputType="textPassword" />
 
     <Button
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Entrar" />
+        android:backgroundTint="@color/green"
+        android:layout_marginLeft="15dp"
+        android:text="Entrar"
+        android:textAllCaps="false"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/toggle_form_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Não tem uma conta? Cadastre-se"
+        android:text="Não tem uma conta?"
+        android:textColor="@color/greenText"
+        android:layout_marginLeft="15dp"
         android:textSize="16sp"
         android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/toggle_form_textview2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cadastre-se"
+        android:layout_marginLeft="15dp"
+        android:textColor="@color/green"
+        android:textSize="16sp" />
 
 </LinearLayout>
