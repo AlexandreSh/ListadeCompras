@@ -28,12 +28,12 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/username_edittext"
+        android:id="@+id/email_edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:hint="Nome de usuário"
+        android:hint="exemplo@email.com"
         android:textColorHint="@color/greenText"
         android:inputType="text" />
 
@@ -46,6 +46,14 @@
         android:hint="Senha"
         android:textColorHint="@color/greenText"
         android:inputType="textPassword" />
+    <TextView
+        android:id="@+id/emailPasswordInvalid_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        android:textSize="14sp"/>
 
     <Button
         android:id="@+id/login_button"
@@ -63,9 +71,8 @@
         android:layout_height="wrap_content"
         android:text="Não tem uma conta?"
         android:textColor="@color/greenText"
-        android:layout_marginLeft="15dp"
         android:textSize="16sp"
-        android:layout_marginTop="16dp" />
+        android:layout_marginLeft="15dp"/>
 
     <TextView
         android:id="@+id/toggle_form_textview2"
