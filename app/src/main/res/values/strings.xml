@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Lista Compras App</string>
+    <string name="itens">Itens:</string>
+    <string name="voltar">Voltar</string>
 </resources>
