@@ -8,8 +8,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.t2.listacomprasapp.databinding.ActivityListListaBinding;
 import com.t2.listacomprasapp.models.listaModel;
 
@@ -17,8 +20,11 @@ import java.util.List;
 
 public class ActivityListLista extends AppCompatActivity {
 
-    FirebaseDatabase db = FirebaseDatabase.getInstance(); //nao to sabendo isso
-    DatabaseReference userRef = db.getReference();
+    /*FirebaseDatabase db = FirebaseDatabase.getInstance(); //nao to sabendo isso
+    DatabaseReference userRef = db.getReference();*/
+    private FirebaseAuth firebaseAuth;
+    private FirebaseFirestore rootRef;
+    private FirebaseAuth.AuthStateListener authStateListener;
 
 
     private Intent edtIntent;
@@ -34,7 +40,7 @@ public class ActivityListLista extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         listLista = binding.listLista;
-        binding.btnVoltar.setOnClickListener(new View.OnClickListener() {
+        /*binding.btnVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {finish();}
         });
@@ -44,6 +50,15 @@ public class ActivityListLista extends AppCompatActivity {
                 startActivity(new Intent(ActivityListLista.this, ActivityViewLista.class));
             }
         });
+        firebaseAuth = FirebaseAuth.getInstance();
+        rootRef = FirebaseFirestore.getInstance();
+
+        authStateListener = firebaseAuth -> {
+            FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+            if (firebaseUser == null) {
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+            }
 
         /*userRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -58,9 +73,9 @@ public class ActivityListLista extends AppCompatActivity {
                 // Failed to read value
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
-        });*/
+        });
     }
-    /*@Override
+    @Override
     protected void onResume(){
         super.onResume();
         edtIntent = new Intent(this, ActivityViewLista.class);
