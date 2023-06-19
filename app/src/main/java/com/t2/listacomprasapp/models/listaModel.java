@@ -1,7 +1,10 @@
-package com.t2.listacomprasapp;
+package com.t2.listacomprasapp.models;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.ServerTimestamp;
+
+import java.util.Date;
 
 public class listaModel {
     private String criador;
@@ -9,6 +12,8 @@ public class listaModel {
     private String modificadaEm;
     private String[][] itens;
     private String id;
+    @ServerTimestamp
+    private Date data;
 
     public listaModel() {
     }

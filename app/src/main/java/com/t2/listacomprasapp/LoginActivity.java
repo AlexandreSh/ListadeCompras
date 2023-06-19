@@ -13,7 +13,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 
@@ -32,6 +31,19 @@ public class LoginActivity extends AppCompatActivity {
     private String email=""; // String para obter o email inserido pelo usuário
     private String password=""; // String para obter a senha inserida pelo usuário
     private FirebaseUser user; // Instância do Firebase User
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Verifica se o usuário está logado
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            Intent intent = new Intent(this, MercadoriasActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,5 +156,65 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+
+    public static class itemModel {
+        private String criador;
+        private String ID;
+        private String preco;
+
+        private  float valor = Float.parseFloat(preco);
+
+        private Boolean taNaLista;
+
+        public itemModel() {
+        }
+
+
+
+        public itemModel(String criador, String ID, String preco, float valor, Boolean taNaLista) {
+            this.criador = criador;
+            this.ID = ID;
+            this.preco = preco;
+            this.valor = valor;
+            this.taNaLista = taNaLista;
+        }
+        public Boolean getTaNaLista() {
+            return taNaLista;
+        }
+
+
+        public float getValor() {
+            return valor;
+        }
+
+        public void setValor(int valor) {
+            this.valor = valor;
+        }
+
+        public String getCriador() {
+            return criador;
+        }
+
+        public void setCriador(String criador) {
+            this.criador = criador;
+        }
+
+        public String getID() {
+            return ID;
+        }
+
+        public void setID(String ID) {
+            this.ID = ID;
+        }
+
+        public String getPreco() {
+            return preco;
+        }
+
+        public void setPreco(String preco) {
+            this.preco = preco;
+        }
     }
 }

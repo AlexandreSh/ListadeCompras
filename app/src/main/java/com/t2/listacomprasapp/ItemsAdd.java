@@ -23,7 +23,7 @@ public class ItemsAdd extends AppCompatActivity {
     private ListView listLista;
     private ActivityListListaBinding binding;
 
-    private List<itemModel> itens;
+    private List<LoginActivity.itemModel> itens;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
