@@ -2,4 +2,7 @@
     <string name="app_name">Lista Compras App</string>
     <string name="itens">Itens:</string>
     <string name="voltar">Voltar</string>
+    <string name="bot_o_add">Botão add</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

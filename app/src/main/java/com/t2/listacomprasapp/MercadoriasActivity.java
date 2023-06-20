@@ -1,13 +1,15 @@
 package com.t2.listacomprasapp;
 
-import static android.content.ContentValues.TAG;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.content.Intent;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -23,12 +25,16 @@ public class MercadoriasActivity extends AppCompatActivity {
     ListView itensListView;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     List<String> dadosDaColecao = new ArrayList<>();
+    ImageButton addButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mercadorias);
+
         itensListView = findViewById(R.id.itemLista);
+        addButton = findViewById(R.id.add_button);
+
         db.collection("Mercadorias")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -57,5 +63,13 @@ public class MercadoriasActivity extends AppCompatActivity {
                         }
                     }
                 });
+        addButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MercadoriasActivity.this, AddMercadoriasActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

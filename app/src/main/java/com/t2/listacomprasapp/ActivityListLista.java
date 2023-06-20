@@ -93,6 +93,6 @@ public class ActivityListLista extends AppCompatActivity {
                 edtIntent.putExtra("LISTA_ID", listaSel.getID()); //ESSA TAMBEM
                 startActivity(edtIntent);
             }
-        });
-    }*/
+        });*/
+    }
 }
