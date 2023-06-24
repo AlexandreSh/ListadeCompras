@@ -5,16 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ListView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.t2.listacomprasapp.databinding.ActivityListListaBinding;
-import com.t2.listacomprasapp.models.listaModel;
+import com.t2.listacomprasapp.models.listasModel;
 
 import java.util.List;
 
@@ -31,7 +27,7 @@ public class ActivityListLista extends AppCompatActivity {
     private ListView listLista;
     private ActivityListListaBinding binding;
 
-    private List<listaModel> listas;
+    private List<listasModel> listas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,12 +80,12 @@ public class ActivityListLista extends AppCompatActivity {
 
     private void preencheLista(){
         listas = db.getReference().getListas(userRef); //TEM QUE FAZER ESSA FUNCAO
-        ArrayAdapter<listaModel> listaAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listas);
+        ArrayAdapter<listasModel> listaAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listas);
         listLista.setAdapter(listaAdapter);
         listLista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                listaModel listaSel = listas.get(position);
+                listasModel listaSel = listas.get(position);
                 edtIntent.putExtra("LISTA_ID", listaSel.getID()); //ESSA TAMBEM
                 startActivity(edtIntent);
             }

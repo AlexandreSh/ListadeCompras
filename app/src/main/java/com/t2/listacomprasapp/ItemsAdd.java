@@ -13,8 +13,6 @@ import com.t2.listacomprasapp.databinding.ActivityListListaBinding;
 import java.util.List;
 
 public class ItemsAdd extends AppCompatActivity {
-
-
     FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference userRef = db.getReference();
 

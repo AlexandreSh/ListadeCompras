@@ -9,12 +9,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.t2.listacomprasapp.models.UsuariosModel;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -26,10 +31,11 @@ public class LoginActivity extends AppCompatActivity {
     private TextView toggleFormTextView2; // TextView para exibir a opção de alternar entre login e registro (outra posição)
     private TextView emailPasswordInvalidTextView; // TextView para exibir mensagens de erro relacionadas a email/senha inválidos
     private FirebaseAuth mAuth; // Instância do Firebase Authentication
+    private FirebaseFirestore rootRef;
     private EditText emailEditText; // EditText para inserção do email
     private EditText passwordEditText; // EditText para inserção da senha
-    private String email=""; // String para obter o email inserido pelo usuário
-    private String password=""; // String para obter a senha inserida pelo usuário
+    private String email = ""; // String para obter o email inserido pelo usuário
+    private String password = ""; // String para obter a senha inserida pelo usuário
     private FirebaseUser user; // Instância do Firebase User
 
 
@@ -38,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
         // Verifica se o usuário está logado
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
+        if (currentUser != null) {
             Intent intent = new Intent(this, MercadoriasActivity.class);
             startActivity(intent);
             finish();
@@ -80,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                 // Verificar se é um registro ou um login e executar a ação apropriada
                 if (isRegister) {
                     handleRegistrationSubmit();
-                }else{
+                } else {
                     handleLoginSubmit();
                 }
             }
@@ -132,12 +138,33 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    private void handleRegistrationSubmit(){
+    private void handleRegistrationSubmit() {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
+                        // Inicialize a instância do FirebaseFirestore
+                        rootRef = FirebaseFirestore.getInstance();
                         // Usuário registrado com sucesso
                         user = mAuth.getCurrentUser();
+                        UsuariosModel usuarioModel = new UsuariosModel(user.getEmail(), user.getUid());
+                        String userDocumentId = user.getEmail();
+
+                        // Referência para a coleção "Usuarios"
+                        CollectionReference usuariosRef = rootRef.collection("Usuarios");
+
+                        // Define o documento com o ID do email do usuário
+                        DocumentReference userDocumentRef = usuariosRef.document(userDocumentId);
+
+                        // Adiciona o usuário ao Firestore
+                        userDocumentRef.set(usuarioModel)
+                                .addOnSuccessListener(aVoid -> {
+                                    // Usuário adicionado com sucesso ao Firestore
+                                    System.out.println("Usuário adicionado com sucesso ao Firestore");
+                                })
+                                .addOnFailureListener(e -> {
+                                    // Ocorreu um erro ao adicionar o usuário ao Firestore
+                                    System.out.println("Erro ao adicionar usuário ao Firestore: " + e.getMessage());
+                                });
                     } else {
                         // Ocorreu um erro durante o registro
                         Exception exception = task.getException();
@@ -156,65 +183,5 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
-    }
-
-
-    public static class itemModel {
-        private String criador;
-        private String ID;
-        private String preco;
-
-        private  float valor = Float.parseFloat(preco);
-
-        private Boolean taNaLista;
-
-        public itemModel() {
-        }
-
-
-
-        public itemModel(String criador, String ID, String preco, float valor, Boolean taNaLista) {
-            this.criador = criador;
-            this.ID = ID;
-            this.preco = preco;
-            this.valor = valor;
-            this.taNaLista = taNaLista;
-        }
-        public Boolean getTaNaLista() {
-            return taNaLista;
-        }
-
-
-        public float getValor() {
-            return valor;
-        }
-
-        public void setValor(int valor) {
-            this.valor = valor;
-        }
-
-        public String getCriador() {
-            return criador;
-        }
-
-        public void setCriador(String criador) {
-            this.criador = criador;
-        }
-
-        public String getID() {
-            return ID;
-        }
-
-        public void setID(String ID) {
-            this.ID = ID;
-        }
-
-        public String getPreco() {
-            return preco;
-        }
-
-        public void setPreco(String preco) {
-            this.preco = preco;
-        }
     }
 }

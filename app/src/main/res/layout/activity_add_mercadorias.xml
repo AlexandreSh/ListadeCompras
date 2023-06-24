@@ -1,47 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddMercadoriasActivity"
     android:orientation="vertical"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
+    tools:context=".AddMercadoriasActivity">
 
     <TextView
         android:id="@+id/addMercadoria_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Cadastrar Mercadoria" />
+        android:text="Cadastrar Mercadoria"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal" />
 
     <TextView
         android:id="@+id/nomeMercadoria_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Nome" />
+        android:text="Nome"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp" />
 
     <EditText
         android:id="@+id/nome_edttext"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:ems="10"
-        android:inputType="text"/>
+        android:inputType="text"
+        android:padding="8dp"
+        android:layout_marginTop="8dp" />
 
     <TextView
         android:id="@+id/preco_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Preço" />
+        android:text="Preço"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp" />
 
     <EditText
         android:id="@+id/preco_edttext"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:ems="10"
-        android:inputType="text" />
+        android:inputType="text"
+        android:padding="8dp"
+        android:layout_marginTop="8dp" />
+
+    <Button
+        android:id="@+id/adicionar_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Adicionar"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:padding="12dp"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal" />
+
 </LinearLayout>
