@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,7 +20,11 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.t2.listacomprasapp.models.ListasModel;
 import com.t2.listacomprasapp.models.UsuariosModel;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -147,6 +152,7 @@ public class LoginActivity extends AppCompatActivity {
                         // Usuário registrado com sucesso
                         user = mAuth.getCurrentUser();
                         UsuariosModel usuarioModel = new UsuariosModel(user.getEmail(), user.getUid());
+
                         String userDocumentId = user.getEmail();
 
                         // Referência para a coleção "Usuarios"
@@ -165,6 +171,13 @@ public class LoginActivity extends AppCompatActivity {
                                     // Ocorreu um erro ao adicionar o usuário ao Firestore
                                     System.out.println("Erro ao adicionar usuário ao Firestore: " + e.getMessage());
                                 });
+                        Map<String, Object> usuarioData = new HashMap<>();
+                        usuarioData.put("email", email);
+
+                        rootRef.collection("ListasDeCompras").document(email)
+                                .set(usuarioData)
+                                .addOnSuccessListener(aVoid -> Log.d("ActivityListLista", "Usuário adicionado à coleção ListasDeCompras"))
+                                .addOnFailureListener(e -> Log.e("ActivityListLista", "Erro ao adicionar usuário à coleção ListasDeCompras", e));
                     } else {
                         // Ocorreu um erro durante o registro
                         Exception exception = task.getException();

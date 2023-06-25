@@ -19,7 +19,7 @@
             android:name=".MercadoriasActivity"
             android:exported="false" />
         <activity
-            android:name=".ItemsAdd"
+            android:name=".ActivityListLista"
             android:exported="false" />
         <activity
             android:name=".ActivityViewLista"

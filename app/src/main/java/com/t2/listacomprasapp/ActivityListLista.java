@@ -1,94 +1,102 @@
 package com.t2.listacomprasapp;
 //lista as listas do usuario
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.t2.listacomprasapp.databinding.ActivityListListaBinding;
-import com.t2.listacomprasapp.models.listasModel;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.t2.listacomprasapp.models.ListasModel;
 
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ActivityListLista extends AppCompatActivity {
 
-    /*FirebaseDatabase db = FirebaseDatabase.getInstance(); //nao to sabendo isso
-    DatabaseReference userRef = db.getReference();*/
-    private FirebaseAuth firebaseAuth;
-    private FirebaseFirestore rootRef;
-    private FirebaseAuth.AuthStateListener authStateListener;
-
-
-    private Intent edtIntent;
-    private ListView listLista;
-    private ActivityListListaBinding binding;
-
-    private List<listasModel> listas;
+    private ListView listaListView;
+    private Button voltarButton;
+    private Button novaListaButton;
+    private FirebaseFirestore db;
+    private FirebaseAuth mAuth;
+    private String usuarioRefEmail;
+    private List<String> listaNomes;
+    private ArrayAdapter<String> listaAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityListListaBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_list_lista);
 
-        listLista = binding.listLista;
-        /*binding.btnVoltar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {finish();}
-        });
-        binding.btnNovaLista.setOnClickListener(new View.OnClickListener() {
+        // Inicialize a instância do FirebaseFirestore
+        db = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        usuarioRefEmail = mAuth.getCurrentUser().getEmail();
+
+        listaListView = findViewById(R.id.listLista);
+        voltarButton = findViewById(R.id.btnVoltar);
+        novaListaButton = findViewById(R.id.btnNovaLista);
+
+        voltarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ActivityListLista.this, ActivityViewLista.class));
+                finish(); // Voltar para a atividade anterior
             }
         });
-        firebaseAuth = FirebaseAuth.getInstance();
-        rootRef = FirebaseFirestore.getInstance();
 
-        authStateListener = firebaseAuth -> {
-            FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-            if (firebaseUser == null) {
-                Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
-            }
-
-        /*userRef.addValueEventListener(new ValueEventListener() {
+        novaListaButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                preencheLista();
+            public void onClick(View v) {
+                abrirCriarListaActivity(); // Abrir a atividade para criar uma nova lista
             }
+        });
 
+        carregarNomesListas();
+    }
+
+    private void carregarNomesListas() {
+        DocumentReference docRef = db.collection("ListasDeCompras").document(usuarioRefEmail);
+        docRef.get();
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d("TAG", "DocumentSnapshot data: " + document.getData());
+                    } else {
+                        Log.d("TAG", "No such document");
+                    }
+                } else {
+                    Log.d("TAG", "get failed with ", task.getException());
+                }
             }
         });
     }
-    @Override
-    protected void onResume(){
-        super.onResume();
-        edtIntent = new Intent(this, ActivityViewLista.class);
-        preencheLista();
+
+
+    private void abrirCriarListaActivity() {
+      //  Intent intent = new Intent(ActivityListLista.this, CriarListaActivity.class);
+        //startActivity(intent);
     }
 
-    private void preencheLista(){
-        listas = db.getReference().getListas(userRef); //TEM QUE FAZER ESSA FUNCAO
-        ArrayAdapter<listasModel> listaAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listas);
-        listLista.setAdapter(listaAdapter);
-        listLista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                listasModel listaSel = listas.get(position);
-                edtIntent.putExtra("LISTA_ID", listaSel.getID()); //ESSA TAMBEM
-                startActivity(edtIntent);
-            }
-        });*/
-    }
 }

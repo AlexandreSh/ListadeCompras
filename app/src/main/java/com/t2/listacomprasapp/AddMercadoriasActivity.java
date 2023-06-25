@@ -41,7 +41,7 @@ public class AddMercadoriasActivity extends AppCompatActivity {
     }
     private void adicionarMercadoria() {
         String nome = nome_edttext.getText().toString();
-        String preco = preco_edttext.getText().toString();
+        Double preco = Double.parseDouble(preco_edttext.getText().toString());
 
         // Criar um novo objeto Mercadoria
         MercadoriasModel mercadoria = new MercadoriasModel(nome, preco);
