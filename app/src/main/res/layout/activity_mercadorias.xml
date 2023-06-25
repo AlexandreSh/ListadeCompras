@@ -86,7 +86,7 @@
         android:id="@+id/btnSair"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sair"
+        android:text="Voltar"
         app:layout_constraintStart_toStartOf="@+id/mgEsq"
         app:layout_constraintTop_toTopOf="@+id/listas_button" />
 

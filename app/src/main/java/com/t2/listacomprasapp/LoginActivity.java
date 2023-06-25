@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         // Verifica se o usuário está logado
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
-            Intent intent = new Intent(this, MercadoriasActivity.class);
+            Intent intent = new Intent(this, ActivityListLista.class);
             startActivity(intent);
             finish();
         }
@@ -127,7 +127,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         // Login realizado com sucesso
                         user = mAuth.getCurrentUser();
-                        Intent intent = new Intent(this, MercadoriasActivity.class);
+                        Intent intent = new Intent(this, ActivityListLista.class);
                         startActivity(intent);
                     } else {
                         // Ocorreu um erro durante o login
@@ -184,7 +184,7 @@ public class LoginActivity extends AppCompatActivity {
                                 .addOnFailureListener(e -> Log.e("ActivityListLista", "Erro ao adicionar usuário à coleção ListasDeCompras", e));
 
                         user = mAuth.getCurrentUser();
-                        Intent intent = new Intent(this, MercadoriasActivity.class);
+                        Intent intent = new Intent(this, ActivityListLista.class);
                         startActivity(intent);
                     } else {
                         // Ocorreu um erro durante o registro

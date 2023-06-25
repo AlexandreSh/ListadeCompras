@@ -93,20 +93,7 @@ public class MercadoriasActivity extends AppCompatActivity {
         });
         btnSair.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                logout();
-            }
+            public void onClick(View v) {finish();}
         });
-    }
-    private void logout(){
-        new AlertDialog.Builder(this).setTitle("Logout").setMessage("Deseja sair do app?").setPositiveButton("Confirmar", ((dialog, which) -> {
-            //  T//ODO:rotina de limpeza de cache do usuario que sair <- parece que nao é possivel com o firebase
-       //     Context context = getBaseContext();
-         //   deleteCache(context);
-            FirebaseAuth.getInstance().signOut();
-            Intent intent = new Intent(MercadoriasActivity.this, LoginActivity.class);
-            startActivity(intent);
-            //finish();
-        })).setNegativeButton("Cancelar", null).show();
     }
 }

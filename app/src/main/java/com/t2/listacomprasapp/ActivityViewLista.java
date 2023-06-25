@@ -11,6 +11,7 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -64,6 +65,12 @@ public class ActivityViewLista extends AppCompatActivity {
             stringNome = b.getString("nomeLista");
             tvNomeLista.setText(stringNome);
         }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            lista = (ListasModel) getIntent().getSerializableExtra("listasModel");
+        }else{
+            lista = (ListasModel) getIntent().getSerializableExtra("listasModel"); //
+        }
+        stringNome = lista.getNomeListas();
         btnVoltar2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {finish();}
@@ -74,7 +81,7 @@ public class ActivityViewLista extends AppCompatActivity {
             public void onClick(View v) {
                // FragmentManager mgr = getSupportFragmentManager();
                // FragmentTransaction transaction = mgr.beginTransaction();
-                startActivity(new Intent(ActivityViewLista.this, AddMercadoriasActivity.class));
+                startActivity(new Intent(ActivityViewLista.this, MercadoriasActivity.class));
             }
         });
         btnDel.setOnClickListener(new View.OnClickListener() {
