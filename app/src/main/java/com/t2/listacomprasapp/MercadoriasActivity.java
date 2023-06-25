@@ -21,6 +21,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.ktx.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -97,9 +100,10 @@ public class MercadoriasActivity extends AppCompatActivity {
     }
     private void logout(){
         new AlertDialog.Builder(this).setTitle("Logout").setMessage("Deseja sair do app?").setPositiveButton("Confirmar", ((dialog, which) -> {
-            //  TODO:rotina de limpeza de cache do usuario que sair
+            //  T//ODO:rotina de limpeza de cache do usuario que sair <- parece que nao é possivel com o firebase
        //     Context context = getBaseContext();
          //   deleteCache(context);
+            FirebaseAuth.getInstance().signOut();
             getBaseContext().getCacheDir().delete();
             Intent intent = new Intent(MercadoriasActivity.this, LoginActivity.class);
             startActivity(intent);
