@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -149,6 +150,7 @@ public class LoginActivity extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
+                        Toast.makeText(this, "Usuário cadastrado com sucesso! "+"\n" +" Fazendo login.", Toast.LENGTH_SHORT).show();
                         // Inicialize a instância do FirebaseFirestore
                         rootRef = FirebaseFirestore.getInstance();
                         // Usuário registrado com sucesso
@@ -180,6 +182,10 @@ public class LoginActivity extends AppCompatActivity {
                                 .set(usuarioData)
                                 .addOnSuccessListener(aVoid -> Log.d("ActivityListLista", "Usuário adicionado à coleção ListasDeCompras"))
                                 .addOnFailureListener(e -> Log.e("ActivityListLista", "Erro ao adicionar usuário à coleção ListasDeCompras", e));
+
+                        user = mAuth.getCurrentUser();
+                        Intent intent = new Intent(this, MercadoriasActivity.class);
+                        startActivity(intent);
                     } else {
                         // Ocorreu um erro durante o registro
                         Exception exception = task.getException();

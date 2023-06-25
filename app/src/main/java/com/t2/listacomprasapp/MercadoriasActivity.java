@@ -72,7 +72,7 @@ public class MercadoriasActivity extends AppCompatActivity {
                             // Configura o adaptador para a ListView
                             itensListView.setAdapter(adapter);
                         } else {
-                            System.out.printf("A tarefa não foi um sucesso");
+                            System.out.print("A tarefa não foi um sucesso");
                         }
                     }
                 });
@@ -104,7 +104,6 @@ public class MercadoriasActivity extends AppCompatActivity {
        //     Context context = getBaseContext();
          //   deleteCache(context);
             FirebaseAuth.getInstance().signOut();
-            getBaseContext().getCacheDir().delete();
             Intent intent = new Intent(MercadoriasActivity.this, LoginActivity.class);
             startActivity(intent);
             //finish();

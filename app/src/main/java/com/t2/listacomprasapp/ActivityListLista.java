@@ -1,10 +1,6 @@
 package com.t2.listacomprasapp;
 //lista as listas do usuario
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -18,23 +14,20 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.t2.listacomprasapp.models.ListasModel;
 
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class ActivityListLista extends AppCompatActivity {
 
@@ -46,6 +39,7 @@ public class ActivityListLista extends AppCompatActivity {
     private String usuarioRefEmail;
     private List<String> listaNomes;
     private ArrayAdapter<String> listaAdapter;
+    private CollectionReference listaRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +61,7 @@ public class ActivityListLista extends AppCompatActivity {
                 finish(); // Voltar para a atividade anterior
             }
         });
+        listaRef = db.collection("ListasDeCompras").document(usuarioRefEmail).collection("ListasDeUsuario");
 
         novaListaButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,8 +75,24 @@ public class ActivityListLista extends AppCompatActivity {
                 builder.setView(edtText);
                 builder.setPositiveButton("Criar", (dialog, which) -> {
                     String nomeLista = edtText.getText().toString().trim();
-                    //criaLista(nomeLista) //TODO: rotina de criar nova lista
-                    abrirCriarListaActivity(nomeLista); // Abrir a atividade para criar uma nova lista
+                    if (nomeLista.matches("")){
+                        nomeLista = "Lista sem Nome";
+                    }
+                    ListasModel lista = new ListasModel(nomeLista);
+                    String idLista = listaRef.document().getId();
+
+                //    CollectionReference listaRef = db.collection( "Listas");
+                    String finalNomeLista = nomeLista;
+                    listaRef.document(idLista).set(lista).addOnSuccessListener(documentReference -> {
+                        String listaId = idLista;
+                        Log.d("ActivityListLista", "Lista criada com sucesso. ID:" + listaId);
+                        Toast.makeText(ActivityListLista.this, "Lista criada com sucesso", Toast.LENGTH_SHORT).show();
+                        abrirCriarListaActivity(finalNomeLista);
+                    }).addOnFailureListener(e -> {Log.e("ActivityListLista", "Erro na criação da lista"+e.getMessage());
+                        Toast.makeText(ActivityListLista.this, "Erro na criação da lista", Toast.LENGTH_SHORT).show();
+                    });
+                    //criaLista(nomeLista) //T.ODO: rotina de criar nova lista
+                    //abrirCriarListaActivity(nomeLista); // Abrir a atividade para criar uma nova lista
 
                 });
                 builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {

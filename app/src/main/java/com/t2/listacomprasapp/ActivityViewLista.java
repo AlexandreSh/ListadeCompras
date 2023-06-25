@@ -1,5 +1,6 @@
 package com.t2.listacomprasapp;
 //exibe a lista selecionada
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -17,7 +18,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.t2.listacomprasapp.databinding.ActivityViewListaBinding;
 import com.t2.listacomprasapp.models.ListasModel;
 import com.t2.listacomprasapp.models.MercadoriasModel;
@@ -38,6 +43,9 @@ public class ActivityViewLista extends AppCompatActivity {
     private ListasModel lista;
     private String stringNome;
     private List<MercadoriasModel> Mercadorias;
+
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     
 
 
@@ -51,9 +59,8 @@ public class ActivityViewLista extends AppCompatActivity {
         tvNomeLista = binding.tvNomeLista;
         btnVoltar2 = binding.btnVoltar2;
         btnDel = binding.btnDel;
-
         Bundle b = getIntent().getExtras();
-        if (b != null) {  //caso iniciando uma nova lista com o nome recevido de abrirCriarListaActivity
+        if (b != null) {  //caso iniciando uma nova lista com o nome recebido de abrirCriarListaActivity
             stringNome = b.getString("nomeLista");
             tvNomeLista.setText(stringNome);
         }
@@ -61,7 +68,6 @@ public class ActivityViewLista extends AppCompatActivity {
             @Override
             public void onClick(View v) {finish();}
         });
-
         btnAddItem = binding.btnAddItem;
         btnAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +75,6 @@ public class ActivityViewLista extends AppCompatActivity {
                // FragmentManager mgr = getSupportFragmentManager();
                // FragmentTransaction transaction = mgr.beginTransaction();
                 startActivity(new Intent(ActivityViewLista.this, AddMercadoriasActivity.class));
-
             }
         });
         btnDel.setOnClickListener(new View.OnClickListener() {
@@ -79,9 +84,10 @@ public class ActivityViewLista extends AppCompatActivity {
             }
         });
 
+
+
         //RecyclerView.LayoutManager col4 = new GridLayoutManager(this,4); //4 colunas, qtdade - nome - preco unitario - total do item
         //listaItens.setLayoutManager(col4); //4 colunas na lista, mas como preencher?
-
     }
     private void preencheItems(){
       //  Mercadorias = ;//<<<<<<TODO:recebe as mercadorias da lista do DB
