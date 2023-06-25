@@ -1,53 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/mercadoriasActivity"
-    tools:context=".MercadoriasActivity"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MercadoriasActivity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="@string/itens" />
-
-    <ListView
-        android:id="@+id/itemLista"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/mgEsq"
         android:layout_width="wrap_content"
-        android:layout_height="581dp"
-        tools:ignore="VisualLintBounds" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="15dp" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/mgDir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="15dp" />
 
-        <Button
-            android:id="@+id/listas_button"
-            android:layout_width="97dp"
-            android:layout_height="55dp"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="28dp"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/mgTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="15dp" />
 
-            android:text="Minhas Listas"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/mgBot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="32dp" />
 
-        <ImageButton
-            android:id="@+id/add_button"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="316dp"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/add"
-            android:contentDescription="@string/bot_o_add"
-            android:padding="8dp"
-            android:scaleType="fitCenter"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="100dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/mgBot"
+        app:layout_constraintEnd_toStartOf="@+id/mgDir"
+        app:layout_constraintStart_toStartOf="@+id/mgEsq"
+        app:layout_constraintTop_toTopOf="@+id/mgTop">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/itens" />
+
+        <ListView
+            android:id="@+id/itemLista"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:ignore="VisualLintBounds" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/listas_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Minhas Listas"
+        app:layout_constraintBottom_toTopOf="@+id/mgBot"
+        app:layout_constraintEnd_toStartOf="@+id/mgDir"
+        app:layout_constraintStart_toStartOf="@+id/mgEsq"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+    <ImageButton
+        android:id="@+id/add_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/add"
+        android:contentDescription="@string/bot_o_add"
+        android:padding="8dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toStartOf="@+id/mgDir"
+        app:layout_constraintTop_toTopOf="@+id/listas_button" />
+
+    <Button
+        android:id="@+id/btnSair"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sair"
+        app:layout_constraintStart_toStartOf="@+id/mgEsq"
+        app:layout_constraintTop_toTopOf="@+id/listas_button" />
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

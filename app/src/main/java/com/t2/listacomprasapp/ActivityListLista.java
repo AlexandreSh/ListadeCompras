@@ -2,14 +2,19 @@ package com.t2.listacomprasapp;
 //lista as listas do usuario
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -66,7 +71,25 @@ public class ActivityListLista extends AppCompatActivity {
         novaListaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                abrirCriarListaActivity(); // Abrir a atividade para criar uma nova lista
+                AlertDialog.Builder builder = new AlertDialog.Builder(ActivityListLista.this);
+                builder.setTitle("Nova Lista");
+                EditText edtText = new EditText(ActivityListLista.this);
+                edtText.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_FLAG_CAP_WORDS);
+                edtText.setHint("Digite o Nome da Nova Lista");
+                edtText.setHintTextColor(Color.BLACK);
+                builder.setView(edtText);
+                builder.setPositiveButton("Criar", (dialog, which) -> {
+                    String nomeLista = edtText.getText().toString().trim();
+                    //criaLista(nomeLista) //TODO: rotina de criar nova lista
+                    abrirCriarListaActivity(nomeLista); // Abrir a atividade para criar uma nova lista
+
+                });
+                builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) { dialog.cancel();}
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
         });
 
@@ -94,9 +117,12 @@ public class ActivityListLista extends AppCompatActivity {
     }
 
 
-    private void abrirCriarListaActivity() {
-      //  Intent intent = new Intent(ActivityListLista.this, CriarListaActivity.class);
-        //startActivity(intent);
+    private void abrirCriarListaActivity(String nomeLista) {
+      Intent intent = new Intent(ActivityListLista.this, ActivityViewLista.class);
+      Bundle b = new Bundle();
+      b.putString("nomeLista",nomeLista);
+      intent.putExtras(b);
+      startActivity(intent);
     }
 
 }

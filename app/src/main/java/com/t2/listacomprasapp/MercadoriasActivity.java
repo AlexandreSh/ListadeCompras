@@ -1,8 +1,12 @@
 package com.t2.listacomprasapp;
 
+import static com.t2.listacomprasapp.LoginActivity.deleteCache;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +33,7 @@ public class MercadoriasActivity extends AppCompatActivity {
     List<String> dadosDaColecao = new ArrayList<>();
     ImageButton addButton;
     Button minhasListasBtn;
+    Button btnSair;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +43,7 @@ public class MercadoriasActivity extends AppCompatActivity {
         itensListView = findViewById(R.id.itemLista);
         addButton = findViewById(R.id.add_button);
         minhasListasBtn = findViewById(R.id.listas_button);
+        btnSair = findViewById(R.id.btnSair);
 
         db.collection("Mercadorias")
                 .get()
@@ -81,5 +88,22 @@ public class MercadoriasActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        btnSair.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logout();
+            }
+        });
+    }
+    private void logout(){
+        new AlertDialog.Builder(this).setTitle("Logout").setMessage("Deseja sair do app?").setPositiveButton("Confirmar", ((dialog, which) -> {
+            //  TODO:rotina de limpeza de cache do usuario que sair
+       //     Context context = getBaseContext();
+         //   deleteCache(context);
+            getBaseContext().getCacheDir().delete();
+            Intent intent = new Intent(MercadoriasActivity.this, LoginActivity.class);
+            startActivity(intent);
+            //finish();
+        })).setNegativeButton("Cancelar", null).show();
     }
 }

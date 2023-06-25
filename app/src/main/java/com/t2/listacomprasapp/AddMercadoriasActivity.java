@@ -7,10 +7,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.t2.listacomprasapp.databinding.ActivityAddMercadoriasBinding;
 import com.t2.listacomprasapp.models.MercadoriasModel;
 
 public class AddMercadoriasActivity extends AppCompatActivity {
@@ -19,16 +21,26 @@ public class AddMercadoriasActivity extends AppCompatActivity {
     EditText preco_edttext;
     Button adicionar_btn;
     FirebaseFirestore firestore;
+    ImageButton btnvoltar;
+
+    private ActivityAddMercadoriasBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_mercadorias);
+        binding = ActivityAddMercadoriasBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        nome_edttext = findViewById(R.id.nome_edttext);
-        preco_edttext = findViewById(R.id.preco_edttext);
-        adicionar_btn = findViewById(R.id.adicionar_button);
+        nome_edttext = binding.nomeEdttext;
+        preco_edttext = binding.precoEdttext;
+        adicionar_btn = binding.adicionarButton;
         firestore = FirebaseFirestore.getInstance();
+        btnvoltar = binding.btnvoltar;
+
+        btnvoltar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {finish();}
+        });
 
         adicionar_btn.setOnClickListener(new View.OnClickListener() {
             @Override

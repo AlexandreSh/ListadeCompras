@@ -36,6 +36,17 @@
         app:layout_constraintGuide_end="32dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnDel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:contentDescription='"Deletar"'
+        android:src="@drawable/baseline_delete_forever_24"
+        app:layout_constraintBottom_toTopOf="@+id/mgBot"
+        app:layout_constraintEnd_toStartOf="@+id/mgNum"
+        app:layout_constraintStart_toStartOf="@+id/mgNum" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAddItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -47,6 +58,16 @@
         app:layout_constraintEnd_toStartOf="@+id/mgDir"
         app:srcCompat="@drawable/baseline_add_24" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnVoltar2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:contentDescription="Voltar"
+        android:src="@drawable/baseline_arrow_back_24"
+        app:layout_constraintBottom_toTopOf="@+id/mgBot"
+        app:layout_constraintStart_toStartOf="@+id/mgEsq" />
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
@@ -57,6 +78,15 @@
         app:layout_constraintStart_toStartOf="@id/mgEsq"
         app:layout_constraintTop_toTopOf="@id/mgTop">
 
+        <TextView
+            android:id="@+id/tvNomeLista"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="NomeLista"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,8 +94,8 @@
 
             <TextView
                 android:id="@+id/tvItem"
-                android:layout_width="139dp"
-                android:layout_height="wrap_content"
+                android:layout_width="86dp"
+                android:layout_height="match_parent"
                 android:layout_marginBottom="1dp"
                 android:text="Item"
                 android:textAlignment="viewEnd"
@@ -104,12 +134,13 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/listaItens"
+
+        <ListView
+            android:id="@+id/lvItems"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        </androidx.recyclerview.widget.RecyclerView>
+        </ListView>
 
         <TextView
             android:id="@+id/tvTotFim"
@@ -140,15 +171,5 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnVoltar2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:contentDescription="Voltar"
-        android:src="@drawable/baseline_arrow_back_24"
-        app:layout_constraintStart_toStartOf="@+id/mgEsq"
-        app:layout_constraintTop_toTopOf="@+id/mgTop" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

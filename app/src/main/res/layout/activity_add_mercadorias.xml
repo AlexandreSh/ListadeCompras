@@ -1,65 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".AddMercadoriasActivity">
-
-    <TextView
-        android:id="@+id/addMercadoria_textview"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/mgEsq"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cadastrar Mercadoria"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginTop="16dp"
-        android:layout_gravity="center_horizontal" />
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="15dp" />
 
-    <TextView
-        android:id="@+id/nomeMercadoria_textview"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/mgDir"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nome"
-        android:textSize="16sp"
-        android:layout_marginTop="16dp" />
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="15dp" />
 
-    <EditText
-        android:id="@+id/nome_edttext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:padding="8dp"
-        android:layout_marginTop="8dp" />
-
-    <TextView
-        android:id="@+id/preco_textview"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/mgTop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Preço"
-        android:textSize="16sp"
-        android:layout_marginTop="16dp" />
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="15dp" />
 
-    <EditText
-        android:id="@+id/preco_edttext"
-        android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/mgBot"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:padding="8dp"
-        android:layout_marginTop="8dp" />
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="32dp" />
 
-    <Button
-        android:id="@+id/adicionar_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Adicionar"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:padding="12dp"
-        android:layout_marginTop="16dp"
-        android:layout_gravity="center_horizontal" />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:baselineAligned="false"
+        android:orientation="vertical"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/mgBot"
+        app:layout_constraintEnd_toStartOf="@+id/mgDir"
+        app:layout_constraintStart_toStartOf="@+id/mgEsq"
+        app:layout_constraintTop_toTopOf="@+id/mgTop">
 
-</LinearLayout>
+        <ImageButton
+            android:id="@+id/btnvoltar"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/baseline_arrow_back_24"
+            tools:layout_conversion_absoluteHeight="50dp"
+            tools:layout_conversion_absoluteWidth="100dp" />
+
+        <TextView
+            android:id="@+id/addMercadoria_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layoutDirection="inherit"
+            android:text="Cadastrar Mercadoria"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:layout_conversion_absoluteHeight="27dp"
+            tools:layout_conversion_absoluteWidth="196dp" />
+
+        <TextView
+            android:id="@+id/nomeMercadoria_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome:"
+            android:textSize="16sp"
+            tools:layout_conversion_absoluteHeight="22dp"
+            tools:layout_conversion_absoluteWidth="43dp" />
+
+        <EditText
+            android:id="@+id/nome_edttext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:padding="8dp"
+            tools:layout_conversion_absoluteHeight="40dp"
+            tools:layout_conversion_absoluteWidth="411dp" />
+
+        <TextView
+            android:id="@+id/preco_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Preço:"
+            android:textSize="16sp"
+            tools:layout_conversion_absoluteHeight="22dp"
+            tools:layout_conversion_absoluteWidth="42dp" />
+
+        <EditText
+            android:id="@+id/preco_edttext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:padding="8dp"
+            tools:layout_conversion_absoluteHeight="40dp"
+            tools:layout_conversion_absoluteWidth="411dp" />
+
+        <Button
+            android:id="@+id/adicionar_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="Adicionar"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:layout_conversion_absoluteHeight="54dp"
+            tools:layout_conversion_absoluteWidth="411dp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
