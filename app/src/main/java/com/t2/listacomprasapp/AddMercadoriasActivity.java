@@ -2,6 +2,7 @@ package com.t2.listacomprasapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -70,7 +71,8 @@ public class AddMercadoriasActivity extends AppCompatActivity {
                     Toast.makeText(this, "Mercadoria adicionada com sucesso", Toast.LENGTH_SHORT).show();
                     limparCampos();
                     // Voltar para a atividade anterior
-                    finish();
+                    startActivity(new Intent(AddMercadoriasActivity.this, MercadoriasActivity.class));
+                    //finish();
                 })
                 .addOnFailureListener(e -> {
                     // Ocorreu um erro ao adicionar a mercadoria ao Firestore
